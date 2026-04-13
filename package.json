@@ -1,0 +1,15 @@
+{
+  "name": "slack-workspace-backup",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node backup.mjs",
+    "view": "node viewer.mjs",
+    "schedule": "node schedule-install.mjs",
+    "schedule:test": "node schedule-install.mjs --interval 60",
+    "unschedule": "node schedule-uninstall.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0"
+  }
+}
