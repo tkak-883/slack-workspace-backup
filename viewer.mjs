@@ -409,13 +409,20 @@ const server = http.createServer((req, res) => {
   send(res, 404, { error: 'not found' });
 });
 
-// ── 起動 ──────────────────────────────────────────────────────────
-loadData();
-server.listen(PORT, '127.0.0.1', () => {
-  const url = `http://localhost:${PORT}`;
-  console.log(`Slack Backup Viewer: ${url}`);
-  const cmd = process.platform === 'darwin' ? `open "${url}"`
-    : process.platform === 'win32' ? `start "" "${url}"`
-    : `xdg-open "${url}"`;
-  exec(cmd, err => { if (err) console.log(`ブラウザで開いてください: ${url}`); });
-});
+// ── 起動（直接実行時のみ）────────────────────────────────────────
+const isMain = process.argv[1] &&
+  path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url));
+
+if (isMain) {
+  loadData();
+  server.listen(PORT, '127.0.0.1', () => {
+    const url = `http://localhost:${PORT}`;
+    console.log(`Slack Backup Viewer: ${url}`);
+    const cmd = process.platform === 'darwin' ? `open "${url}"`
+      : process.platform === 'win32' ? `start "" "${url}"`
+      : `xdg-open "${url}"`;
+    exec(cmd, err => { if (err) console.log(`ブラウザで開いてください: ${url}`); });
+  });
+}
+
+export { getHTML };

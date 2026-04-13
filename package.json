@@ -7,7 +7,8 @@
     "view": "node viewer.mjs",
     "schedule": "node schedule-install.mjs",
     "schedule:test": "node schedule-install.mjs --interval 60",
-    "unschedule": "node schedule-uninstall.mjs"
+    "unschedule": "node schedule-uninstall.mjs",
+    "demo": "node demo.mjs"
   },
   "dependencies": {
     "dotenv": "^16.0.0"
